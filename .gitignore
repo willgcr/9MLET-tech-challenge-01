@@ -7,7 +7,10 @@ __pycache__/
 *.egg-info/
 *.egg
 .eggs/
-build/
+build/lib*/
+build/bdist*/
+build/scripts*/
+build/temp*/
 dist/
 pip-wheel-metadata/
 

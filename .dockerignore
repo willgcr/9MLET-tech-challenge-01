@@ -1,0 +1,51 @@
+# Build artifacts and caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtualenvs (we build a fresh one inside the image)
+.venv/
+env/
+venv/
+
+# Test / lint caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage*
+htmlcov/
+
+# Notebooks (don't ship them in the production image)
+notebooks/
+*.ipynb_checkpoints/
+
+# Large local-only directories
+mlruns/
+mlartifacts/
+data/raw/
+data/processed/
+data/interim/
+
+# Docs (don't ship in the production image)
+docs/
+
+# Git / VCS
+.git/
+.gitignore
+.gitattributes
+
+# Tooling
+tests/
+Makefile
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
