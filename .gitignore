@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+
+# Virtualenvs
+env/
+.venv/
+venv/
+
+# Testing / linting caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Data (raw datasets are downloaded, not committed)
+data/raw/*
+data/processed/*
+data/interim/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/interim/.gitkeep
+
+# Model artifacts: keep the trained ones tracked so the Docker image
+# builds the same way locally and on the deploy host.
+models/*
+!models/.gitkeep
+!models/preprocessor.joblib
+!models/mlp.pt
+!models/metadata.json
+
+# MLflow tracking store
+mlruns/
+mlartifacts/
+mlflow.db
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs
+*.log
+logs/
+
+# Internal dev journal - not for GitHub
+building-notes.md

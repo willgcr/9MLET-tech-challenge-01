@@ -1,0 +1,4 @@
+# Dependencies are declared in pyproject.toml (single source of truth).
+# This file exists only so that `pip install -r requirements.txt`
+# still works for users following the older convention.
+-e .[dev]
