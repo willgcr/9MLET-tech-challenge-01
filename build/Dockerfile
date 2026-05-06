@@ -31,14 +31,17 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Create the runtime user up-front so we can set ownership at COPY time
+# (much faster than a recursive chown over the venv afterwards).
+RUN useradd --create-home --shell /bin/bash --uid 1001 churn
+
 # Copy the resolved venv and the source from the builder stage.
-COPY --from=builder /app/.venv /app/.venv
-COPY --from=builder /app/src /app/src
-COPY --from=builder /app/pyproject.toml /app/pyproject.toml
+COPY --from=builder --chown=churn:churn /app/.venv /app/.venv
+COPY --from=builder --chown=churn:churn /app/src /app/src
+COPY --from=builder --chown=churn:churn /app/pyproject.toml /app/pyproject.toml
 
 # Bake the trained model artifacts into the image.
-# Run `make train` locally before `docker build` so this directory is populated.
-COPY models/ /app/models/
+COPY --chown=churn:churn models/ /app/models/
 
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
@@ -47,9 +50,6 @@ ENV PATH="/app/.venv/bin:$PATH" \
     HOST=0.0.0.0 \
     PORT=8000
 
-# Run as a non-root user.
-RUN useradd --create-home --shell /bin/bash --uid 1001 churn \
-    && chown -R churn:churn /app
 USER churn
 
 EXPOSE 8000
